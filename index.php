@@ -1,0 +1,1 @@
+Index file of a custom theme.
