@@ -1,10 +1,8 @@
 <?php
-function myFirstFunction()
-{
-    echo "<p>This is a para.</p>";
+while (have_posts()) {
+    the_post(); ?>
+    <h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
+    <p><?php the_content(); ?></p>
+    <hr>
+<?php
 }
-myFirstFunction();
-?>
-
-<h1><?php bloginfo('name'); ?></h1>
-<p><?php bloginfo('description'); ?></p>
