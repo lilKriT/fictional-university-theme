@@ -34,9 +34,15 @@ while (have_posts()) {
             <h2 class="page-links__title"><a href="#">About Us</a></h2>
             <ul class="min-list">
                 <?php
+                if ($theParent) {
+                    $findChildrenOf = $theParent;
+                } else {
+                    $findChildrenOf = get_the_ID();
+                }
+
                 wp_list_pages(array(
                     "title_li" => NULL,
-                    "child_of" => get_the_ID(),
+                    "child_of" => $findChildrenOf,
                 ));
                 ?>
             </ul>
