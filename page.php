@@ -36,6 +36,7 @@ while (have_posts()) {
                 <?php
                 wp_list_pages(array(
                     "title_li" => NULL,
+                    "child_of" => get_the_ID(),
                 ));
                 ?>
             </ul>
