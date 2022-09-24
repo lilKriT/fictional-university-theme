@@ -17,5 +17,9 @@ add_action("wp_enqueue_scripts", "university_files");
 function university_features()
 {
     add_theme_support("title-tag");
+    // Personally I would add it to a different function but that's how the course does it:
+    register_nav_menu('headerMenuLocation', 'Header Menu Location');
+    register_nav_menu('footerMenuLocationOne', 'Footer Menu Location One');
+    register_nav_menu('footerMenuLocationTwo', 'Footer Menu Location Two');
 }
 add_action("after_setup_theme", "university_features");
