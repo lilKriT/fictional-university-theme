@@ -104,7 +104,7 @@
     </div>
 </div>
 
-<footer class="site-footer">
+<!-- <footer class="site-footer">
     <div class="site-footer__inner container container--narrow">
         <div class="group">
             <div class="site-footer__col-one">
@@ -162,6 +162,6 @@
                 </nav>
             </div>
         </div>
-    </div>
+    </div> -->
 
-    <?php get_footer(); ?>
+<?php get_footer(); ?>
