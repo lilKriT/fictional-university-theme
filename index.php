@@ -32,7 +32,11 @@ get_header();
         </div>
     <?
     }
+
+    // Pagination
+    echo paginate_links();
     ?>
+
 </div>
 
 <?php
