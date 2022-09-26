@@ -23,15 +23,3 @@ function university_features()
     register_nav_menu('footerMenuLocationTwo', 'Footer Menu Location Two');
 }
 add_action("after_setup_theme", "university_features");
-
-function university_post_types()
-{
-    register_post_type("event", array(
-        'public' => true,
-        'labels' => array(
-            'name' => "Events"
-        ),
-        'menu_icon' => "dashicons-calendar"
-    ));
-}
-add_action("init", "university_post_types");
