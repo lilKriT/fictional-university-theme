@@ -3,17 +3,9 @@
 get_header();
 
 while (have_posts()) {
-    the_post(); ?>
-
-    <div class="page-banner">
-        <div class="page-banner__bg-image" style="background-image: url(<?php echo get_theme_file_uri("/images/ocean.jpg"); ?>)"></div>
-        <div class="page-banner__content container container--narrow">
-            <h1 class="page-banner__title"><?php the_title(); ?></h1>
-            <div class="page-banner__intro">
-                <p>REPLACE THIS LATER</p>
-            </div>
-        </div>
-    </div>
+    the_post();
+    pageBanner();
+?>
 
     <div class="container container--narrow page-section">
 
@@ -58,14 +50,6 @@ while (have_posts()) {
             <?php the_content(); ?>
         </div>
     </div>
-
-    <!-- <div class="page-section page-section--beige">
-        <div class="container container--narrow generic-content">
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officia voluptates vero vel temporibus aliquid possimus, facere accusamus modi. Fugit saepe et autem, laboriosam earum reprehenderit illum odit nobis, consectetur dicta. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos molestiae, tempora alias atque vero officiis sit commodi ipsa vitae impedit odio repellendus doloremque quibusdam quo, ea veniam, ad quod sed.</p>
-
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officia voluptates vero vel temporibus aliquid possimus, facere accusamus modi. Fugit saepe et autem, laboriosam earum reprehenderit illum odit nobis, consectetur dicta. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos molestiae, tempora alias atque vero officiis sit commodi ipsa vitae impedit odio repellendus doloremque quibusdam quo, ea veniam, ad quod sed.</p>
-        </div>
-    </div> -->
 
 <?php
 
