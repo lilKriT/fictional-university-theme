@@ -21,6 +21,9 @@ function university_features()
     register_nav_menu('headerMenuLocation', 'Header Menu Location');
     register_nav_menu('footerMenuLocationOne', 'Footer Menu Location One');
     register_nav_menu('footerMenuLocationTwo', 'Footer Menu Location Two');
+
+    // Featured image
+    add_theme_support("post-thumbnails");
 }
 add_action("after_setup_theme", "university_features");
 
