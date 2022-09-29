@@ -27,33 +27,32 @@ while (have_posts()) {
 
         <?php
 
-        $relatedProfessors = new WP_Query(array(
+        $relatedPrograms = new WP_Query(array(
             'posts_per_page' => -1,
-            'post_type' => "professor",
+            'post_type' => "program",
             'orderby' => 'title',
             'order' => "ASC",
             'meta_query' => array(
                 // I am not sure those quotes are necessary? Works without them.
                 array(
-                    'key' => 'related_programs',
+                    'key' => 'related_campus',
                     'compare' => "LIKE",
                     'value' => '"' . get_the_ID() . '"',
                 )
             )
         ));
 
-        if ($relatedProfessors->have_posts()) {
+        if ($relatedPrograms->have_posts()) {
             echo "<hr class='section-break'>";
-            echo "<h2 class='headline headline--medium'>" . get_the_title() . " Professors</h2>";
+            echo "<h2 class='headline headline--medium'>Programs available at this campus:</h2>";
 
-            echo "<ul class='professor-cards'>";
-            while ($relatedProfessors->have_posts()) {
-                $relatedProfessors->the_post();
+            echo "<ul class='min-list link-list'>";
+            while ($relatedPrograms->have_posts()) {
+                $relatedPrograms->the_post();
         ?>
-                <li class="professor-card__list-item">
-                    <a href="<?php the_permalink(); ?>" class="professor-card">
-                        <img class="professor-card__image" src="<?php the_post_thumbnail_url('professorLandscape'); ?>">
-                        <span class="professor-card__name"><?php the_title(); ?></span>
+                <li>
+                    <a href="<?php the_permalink(); ?>">
+                        <?php the_title(); ?>
                     </a>
                 </li>
         <?php
