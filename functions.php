@@ -88,3 +88,11 @@ function pageBanner($args = NULL)
     </div>
 <?php
 }
+
+// I'm not using google maps, but the code is here:
+function universityMapKey($api)
+{
+    $api['key'] = "KEYGOESHERE";
+    return $api;
+}
+add_filter('acf/field/google_map/api', 'universityMapKey');
