@@ -10,6 +10,8 @@ function university_files()
     wp_enqueue_style("google-fonts", "https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Roboto:ital,wght@0,100;0,300;0,400;0,700;1,400;1,700");
 
     wp_enqueue_script("university_js", get_theme_file_uri('/build/index.js'), array('jquery'), '1.0', true);
+    // Not using google maps but the code is here:
+    wp_enqueue_script("googleMap", "//maps.googleapis.com/maps/api/js?key=KEYGOESHERE", NULL, '1.0', true);
 }
 
 add_action("wp_enqueue_scripts", "university_files");
