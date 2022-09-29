@@ -1,0 +1,30 @@
+{
+  "name": "fictional-university-theme",
+  "version": "1.0.0",
+  "description": "A WordPress theme for a fictional university. Following a Udemy course.\r Created by lilKriT.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "wp-scripts build",
+    "start": "wp-scripts start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lilKriT/fictional-university-theme.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lilKriT/fictional-university-theme/issues"
+  },
+  "homepage": "https://github.com/lilKriT/fictional-university-theme#readme",
+  "devDependencies": {
+    "@wordpress/scripts": "^24.2.0"
+  },
+  "dependencies": {
+    "@glidejs/glide": "^3.6.0",
+    "axios": "^0.27.2",
+    "normalize.css": "^8.0.1"
+  }
+}
