@@ -36,7 +36,11 @@ class Search {
   keyPressDispatcher(e) {
     // console.log(e.keyCode);
 
-    if (e.keyCode == 83 && !this.isOverlayOpen) {
+    if (
+      e.keyCode == 83 &&
+      !this.isOverlayOpen &&
+      !$("input, textarea)").is(":focus")
+    ) {
       this.openOverlay();
     }
 
@@ -46,12 +50,21 @@ class Search {
   }
 
   typingLogic(e) {
-    clearTimeout(this.typingTimer);
-    if (!this.isSpinnerVisible) {
-      this.resultsDiv.html("<div class='spinner-loader'></div>");
-      this.isSpinnerVisible = true;
+    if (this.searchField.val() != this.previousValue) {
+      clearTimeout(this.typingTimer);
+
+      if (this.searchField.val()) {
+        if (!this.isSpinnerVisible) {
+          this.resultsDiv.html("<div class='spinner-loader'></div>");
+          this.isSpinnerVisible = true;
+        }
+        this.typingTimer = setTimeout(this.getResults.bind(this), 500);
+      } else {
+        this.resultsDiv.html("");
+      }
     }
-    this.typingTimer = setTimeout(this.getResults.bind(this), 500);
+
+    this.previousValue = this.searchField.val();
   }
 
   getResults() {
