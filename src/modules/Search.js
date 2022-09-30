@@ -14,7 +14,7 @@ class Search {
     this.openButton.on("click", this.openOverlay.bind(this));
     this.closeButton.on("click", this.closeOverlay.bind(this));
     $(document).on("keyup", this.keyPressDispatcher.bind(this));
-    this.searchField.on("keyup", this.typingLogic.bind(this));
+    this.searchField.on("keyup", this.typingLogic);
   }
 
   openOverlay() {
@@ -41,7 +41,9 @@ class Search {
     }
   }
 
-  typingLogic(e) {}
+  typingLogic(e) {
+    setTimeout(() => alert("lol"), 2000);
+  }
 }
 
 export default Search;

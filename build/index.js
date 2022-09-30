@@ -205,7 +205,7 @@ class Search {
     this.openButton.on("click", this.openOverlay.bind(this));
     this.closeButton.on("click", this.closeOverlay.bind(this));
     jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on("keyup", this.keyPressDispatcher.bind(this));
-    this.searchField.on("keyup", this.typingLogic.bind(this));
+    this.searchField.on("keyup", this.typingLogic);
   }
 
   openOverlay() {
@@ -231,7 +231,9 @@ class Search {
     }
   }
 
-  typingLogic(e) {}
+  typingLogic(e) {
+    setTimeout(() => alert("lol"), 2000);
+  }
 
 }
 
