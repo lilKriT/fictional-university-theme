@@ -9,6 +9,8 @@ class Search {
     this.searchField = $("#search-term");
     this.resultsDiv = $("#search-overlay__results");
     this.typingTimer;
+    this.isSpinnerVisible = false;
+    this.previousValue;
     this.events();
   }
 
@@ -45,11 +47,16 @@ class Search {
 
   typingLogic(e) {
     clearTimeout(this.typingTimer);
+    if (!this.isSpinnerVisible) {
+      this.resultsDiv.html("<div class='spinner-loader'></div>");
+      this.isSpinnerVisible = true;
+    }
     this.typingTimer = setTimeout(this.getResults.bind(this), 500);
   }
 
   getResults() {
-    this.resultsDiv.html("<div class='spinner-loader'></div>");
+    this.resultsDiv.html("Results will go here");
+    this.isSpinnerVisible = false;
   }
 }
 
