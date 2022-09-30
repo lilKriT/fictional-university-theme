@@ -7,6 +7,8 @@ class Search {
     this.searchOverlay = $(".search-overlay");
     this.isOverlayOpen = false;
     this.searchField = $("#search-term");
+    this.resultsDiv = $("#search-overlay__results");
+    this.typingTimer;
     this.events();
   }
 
@@ -14,7 +16,7 @@ class Search {
     this.openButton.on("click", this.openOverlay.bind(this));
     this.closeButton.on("click", this.closeOverlay.bind(this));
     $(document).on("keyup", this.keyPressDispatcher.bind(this));
-    this.searchField.on("keyup", this.typingLogic);
+    this.searchField.on("keyup", this.typingLogic.bind(this));
   }
 
   openOverlay() {
@@ -42,7 +44,12 @@ class Search {
   }
 
   typingLogic(e) {
-    setTimeout(() => alert("lol"), 2000);
+    clearTimeout(this.typingTimer);
+    this.typingTimer = setTimeout(this.getResults.bind(this), 500);
+  }
+
+  getResults() {
+    this.resultsDiv.html("<div class='spinner-loader'></div>");
   }
 }
 
