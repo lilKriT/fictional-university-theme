@@ -5,14 +5,16 @@ class Search {
     this.openButton = $(".js-search-trigger");
     this.closeButton = $(".search-overlay__close");
     this.searchOverlay = $(".search-overlay");
-    this.events();
     this.isOverlayOpen = false;
+    this.searchField = $("#search-term");
+    this.events();
   }
 
   events() {
     this.openButton.on("click", this.openOverlay.bind(this));
     this.closeButton.on("click", this.closeOverlay.bind(this));
     $(document).on("keyup", this.keyPressDispatcher.bind(this));
+    this.searchField.on("keyup", this.typingLogic.bind(this));
   }
 
   openOverlay() {
@@ -38,6 +40,8 @@ class Search {
       this.closeOverlay();
     }
   }
+
+  typingLogic(e) {}
 }
 
 export default Search;
