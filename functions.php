@@ -12,6 +12,11 @@ function university_files()
     wp_enqueue_script("university_js", get_theme_file_uri('/build/index.js'), array('jquery'), '1.0', true);
     // Not using google maps but the code is here:
     wp_enqueue_script("googleMap", "//maps.googleapis.com/maps/api/js?key=KEYGOESHERE", NULL, '1.0', true);
+
+    // Localizes the file. Name of file (from lines above), variable name (make it up), array of data you want available
+    wp_localize_script("university_js", "universityData", array(
+        'root_url' => get_site_url(),
+    ));
 }
 
 add_action("wp_enqueue_scripts", "university_files");

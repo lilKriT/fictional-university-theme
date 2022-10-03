@@ -69,7 +69,8 @@ class Search {
 
   getResults() {
     $.getJSON(
-      "http://fictional-university.local/wp-json/wp/v2/posts?search=" +
+      universityData.root_url +
+        "/wp-json/wp/v2/posts?search=" +
         this.searchField.val(),
       (posts) => {
         this.resultsDiv.html(`
@@ -87,6 +88,8 @@ class Search {
           .join("")}
           ${posts.length ? "</ul>" : ""}
         `);
+
+        this.isSpinnerVisible = false;
       }
     );
   }
