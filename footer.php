@@ -79,7 +79,7 @@
     </div>
     <div class="container">
         <div id="search-overlay__results">
-            Hello
+            Search results will appear shortly.
         </div>
     </div>
 </div>
