@@ -95,7 +95,7 @@ class Search {
         
         ${combinedResults
           .map((el) => {
-            return `<li><a href="${el.link}">${el.title.rendered}</a></li>`;
+            return `<li><a href="${el.link}">${el.title.rendered}</a> by ${el.authorName}</li>`;
           })
           .join("")}
           ${combinedResults.length ? "</ul>" : ""}
