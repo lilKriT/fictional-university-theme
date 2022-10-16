@@ -264,7 +264,7 @@ class Search {
         ${combinedResults.length ? "<ul class='link-list min-list'>" : "<p>No results match your search.</p>"}
         
         ${combinedResults.map(el => {
-        return `<li><a href="${el.link}">${el.title.rendered}</a> by ${el.authorName}</li>`;
+        return `<li><a href="${el.link}">${el.title.rendered}</a>${el.type == "post" ? ` by ${el.authorName}` : ``}</li>`;
       }).join("")}
           ${combinedResults.length ? "</ul>" : ""}
         `);
