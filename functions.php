@@ -1,5 +1,7 @@
 <?php
 
+require get_theme_file_path("/includes/search-route.php");
+
 function university_files()
 {
     // The first name doesn't matter - this is the basic css
