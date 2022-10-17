@@ -1,10 +1,5 @@
 <?php
 
-function universitySearchResults()
-{
-    return "Congrats, route";
-}
-
 function universityRegisterSearch()
 {
     // arguments are namepsace, route, what happens
@@ -14,3 +9,17 @@ function universityRegisterSearch()
     ));
 }
 add_action("rest_api_init", "universityRegisterSearch");
+
+function universitySearchResults()
+{
+    // WP will automatically convert this into JSON
+    // return array(
+    //     "red,", "orange"
+    // );
+
+    $professors = new WP_Query(array(
+        "post_type" => "professor"
+    ));
+
+    return $professors->posts;
+}
