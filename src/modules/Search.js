@@ -71,6 +71,31 @@ class Search {
   }
 
   getResults() {
+    // New way
+    $.getJSON(
+      universityData.root_url +
+        "/wp-json/university/v1/search?term=" +
+        this.searchField.val(),
+      (results) => {
+        this.resultsDiv.html(`
+      <div class="row">
+        <div class="one-third">
+          <h2 class="search-overlay__section-title">General information</h2>
+        </div>
+        <div class="one-third">
+          <h2 class="search-overlay__section-title">Programs</h2>
+          <h2 class="search-overlay__section-title">Professors</h2>
+        </div>
+        <div class="one-third">
+          <h2 class="search-overlay__section-title">Campuses</h2>
+          <h2 class="search-overlay__section-title">Events</h2>
+        </div>
+      </div>
+      `);
+      }
+    );
+
+    // Legacy
     $.when(
       $.getJSON(
         universityData.root_url +
