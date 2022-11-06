@@ -71,7 +71,7 @@ class Search {
   }
 
   getResults() {
-    // New way
+    // Three column
     $.getJSON(
       universityData.root_url +
         "/wp-json/university/v1/search?term=" +
@@ -81,6 +81,20 @@ class Search {
       <div class="row">
         <div class="one-third">
           <h2 class="search-overlay__section-title">General information</h2>
+          ${
+            results.generalInfo.length
+              ? "<ul class='link-list min-list'>"
+              : "<p>No results match your search.</p>"
+          }
+          
+          ${results.generalInfo
+            .map((el) => {
+              return `<li><a href="${el.permalink}">${el.title}</a>${
+                el.postType == "post" ? ` by ${el.authorName}` : ``
+              }</li>`;
+            })
+            .join("")}
+            ${results.generalInfo.length ? "</ul>" : ""}
         </div>
         <div class="one-third">
           <h2 class="search-overlay__section-title">Programs</h2>
@@ -92,46 +106,6 @@ class Search {
         </div>
       </div>
       `);
-      }
-    );
-
-    // Legacy
-    $.when(
-      $.getJSON(
-        universityData.root_url +
-          "/wp-json/wp/v2/posts?search=" +
-          this.searchField.val()
-      ),
-      $.getJSON(
-        universityData.root_url +
-          "/wp-json/wp/v2/pages?search=" +
-          this.searchField.val()
-      )
-    ).then(
-      (posts, pages) => {
-        let combinedResults = posts[0].concat(pages[0]);
-        this.resultsDiv.html(`
-        <h2 class="search-overlay__section-title">General information</h2>
-        ${
-          combinedResults.length
-            ? "<ul class='link-list min-list'>"
-            : "<p>No results match your search.</p>"
-        }
-        
-        ${combinedResults
-          .map((el) => {
-            return `<li><a href="${el.link}">${el.title.rendered}</a>${
-              el.type == "post" ? ` by ${el.authorName}` : ``
-            }</li>`;
-          })
-          .join("")}
-          ${combinedResults.length ? "</ul>" : ""}
-        `);
-
-        this.isSpinnerVisible = false;
-      },
-      () => {
-        this.resultsDiv.html("<p>Unexpected error. Please try again.</p>");
       }
     );
   }
