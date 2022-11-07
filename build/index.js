@@ -278,7 +278,20 @@ class Search {
         return `<li><a href="${el.permalink}">${el.title}</a></li>`;
       }).join("")}
             ${results.programs.length ? "</ul>" : ""}
+            
           <h2 class="search-overlay__section-title">Professors</h2>
+          ${results.professors.length ? "<ul class='professor-cards'>" : `<p>No professors match your search.</p>`}
+          
+          ${results.professors.map(el => {
+        return `<li class="professor-card__list-item">
+                    <a href="${el.permalink}" class="professor-card">
+                        <img class="professor-card__image" src="${el.image}">
+                        <span class="professor-card__name">${el.title}</span>
+                    </a>
+                </li>
+              `;
+      }).join("")}
+            ${results.professors.length ? "</ul>" : ""}
         </div>
         <div class="one-third">
           <h2 class="search-overlay__section-title">Campuses</h2>
