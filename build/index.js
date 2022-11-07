@@ -302,6 +302,22 @@ class Search {
       }).join("")}
             ${results.campuses.length ? "</ul>" : ""}
           <h2 class="search-overlay__section-title">Events</h2>
+          ${results.events.length ? "" : `<p>No events match your search. <a href="${universityData.root_url}/events">View all events</a></p>`}
+          
+          ${results.events.map(el => {
+        return `
+              <div class="event-summary">
+                <a class="event-summary__date t-center" href="${el.permalink}">
+                    <span class="event-summary__month">${el.month}</span>
+                    <span class="event-summary__day">${el.day}</span>
+                </a>
+                <div class="event-summary__content">
+                    <h5 class="event-summary__title headline headline--tiny"><a href="${el.permalink}">${el.title}</a></h5>
+                    <p>${el.description}<a href="${el.permalink}" class="nu gray">Learn more</a></p>
+                </div>
+            </div>
+              `;
+      }).join("")}
         </div>
       </div>
       `);
