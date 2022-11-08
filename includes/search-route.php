@@ -107,7 +107,7 @@ function universitySearchResults($data)
 
         $programRelationshipQuery = new WP_Query(
             array(
-                "post_type" => array("professors", "event"),
+                "post_type" => array("professor", "event"),
                 "meta_query" => $programsMetaQuery,
             )
         );
