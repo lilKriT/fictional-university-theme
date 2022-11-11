@@ -4,6 +4,7 @@ import "../css/style.scss";
 import MobileMenu from "./modules/MobileMenu";
 import HeroSlider from "./modules/HeroSlider";
 import GoogleMap from "./modules/GoogleMap";
+import MyNotes from "./modules/MyNotes";
 
 // Live Search
 import Search from "./modules/Search";
@@ -15,3 +16,6 @@ const googleMap = new GoogleMap();
 
 // Live Search
 const search = new Search();
+
+// My notes
+const myNotes = new MyNotes();
