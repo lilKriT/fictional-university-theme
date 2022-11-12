@@ -18,6 +18,7 @@ function university_files()
     // Localizes the file. Name of file (from lines above), variable name (make it up), array of data you want available
     wp_localize_script("university_js", "universityData", array(
         'root_url' => get_site_url(),
+        'nonce' => wp_create_nonce("wp_rest"),
     ));
 }
 
