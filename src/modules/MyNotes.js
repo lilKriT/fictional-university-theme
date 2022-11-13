@@ -7,6 +7,7 @@ class MyNotes {
 
   events() {
     $(".delete-note").on("click", this.deleteNote);
+    $(".edit-note").on("click", this.editNote);
   }
 
   // Custom methods
@@ -21,6 +22,7 @@ class MyNotes {
         xhr.setRequestHeader("X-WP-Nonce", universityData.nonce);
       },
       success: (res) => {
+        thisNote.slideUp();
         console.log("Note removed");
         console.log(res);
       },
@@ -29,6 +31,16 @@ class MyNotes {
         console.log(res);
       },
     });
+  }
+
+  editNote(e) {
+    let thisNote = $(e.target).parents("li");
+
+    thisNote
+      .find(".note-title-field, .note-body-field")
+      .removeAttr("readonly")
+      .addClass("note-active-field");
+    thisNote.find(".update-note").addClass("update-note--visible");
   }
 }
 
