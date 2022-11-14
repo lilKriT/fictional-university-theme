@@ -8,6 +8,7 @@ class MyNotes {
   events() {
     $(".delete-note").on("click", this.deleteNote);
     $(".edit-note").on("click", this.editNote.bind(this));
+    $(".update-note").on("click", this.updateNote.bind(this));
   }
 
   // Custom methods
@@ -28,6 +29,35 @@ class MyNotes {
       },
       error: (res) => {
         console.log("Couldn't remove");
+        console.log(res);
+      },
+    });
+  }
+
+  // Updating note
+  updateNote(e) {
+    let thisNote = $(e.target).parents("li");
+
+    let updatedPost = {
+      title: thisNote.find(".note-title-field").val(),
+      content: thisNote.find(".note-body-field").val(),
+    };
+
+    $.ajax({
+      url:
+        universityData.root_url + "/wp-json/wp/v2/note/" + thisNote.data("id"),
+      type: "POST",
+      data: updatedPost,
+      beforeSend: (xhr) => {
+        xhr.setRequestHeader("X-WP-Nonce", universityData.nonce);
+      },
+      success: (res) => {
+        this.makeNoteReadOnly(thisNote);
+        console.log("Note updated");
+        console.log(res);
+      },
+      error: (res) => {
+        console.log("Couldn't update");
         console.log(res);
       },
     });

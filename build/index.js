@@ -2667,6 +2667,7 @@ class MyNotes {
   events() {
     jquery__WEBPACK_IMPORTED_MODULE_0___default()(".delete-note").on("click", this.deleteNote);
     jquery__WEBPACK_IMPORTED_MODULE_0___default()(".edit-note").on("click", this.editNote.bind(this));
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()(".update-note").on("click", this.updateNote.bind(this));
   } // Custom methods
 
 
@@ -2685,6 +2686,32 @@ class MyNotes {
       },
       error: res => {
         console.log("Couldn't remove");
+        console.log(res);
+      }
+    });
+  } // Updating note
+
+
+  updateNote(e) {
+    let thisNote = jquery__WEBPACK_IMPORTED_MODULE_0___default()(e.target).parents("li");
+    let updatedPost = {
+      title: thisNote.find(".note-title-field").val(),
+      content: thisNote.find(".note-body-field").val()
+    };
+    jquery__WEBPACK_IMPORTED_MODULE_0___default().ajax({
+      url: universityData.root_url + "/wp-json/wp/v2/note/" + thisNote.data("id"),
+      type: "POST",
+      data: updatedPost,
+      beforeSend: xhr => {
+        xhr.setRequestHeader("X-WP-Nonce", universityData.nonce);
+      },
+      success: res => {
+        this.makeNoteReadOnly(thisNote);
+        console.log("Note updated");
+        console.log(res);
+      },
+      error: res => {
+        console.log("Couldn't update");
         console.log(res);
       }
     });
