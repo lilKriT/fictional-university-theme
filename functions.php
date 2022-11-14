@@ -164,3 +164,13 @@ function ourLoginCSS()
     wp_enqueue_style("google-fonts", "https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Roboto:ital,wght@0,100;0,300;0,400;0,700;1,400;1,700");
 }
 add_action("login_enqueue_scripts", "ourLoginCSS");
+
+// Force private notes
+function makeNotePrivate($data)
+{
+    if ($data['post_type'] == "note" && $data['post_status'] != 'trash') {
+        $data['post_status'] = "private";
+    }
+    return $data;
+}
+add_filter("wp_insert_post_data", "makeNotePrivate");
