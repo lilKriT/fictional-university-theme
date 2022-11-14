@@ -2666,7 +2666,7 @@ class MyNotes {
 
   events() {
     jquery__WEBPACK_IMPORTED_MODULE_0___default()(".delete-note").on("click", this.deleteNote);
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()(".edit-note").on("click", this.editNote);
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()(".edit-note").on("click", this.editNote.bind(this));
   } // Custom methods
 
 
@@ -2692,8 +2692,30 @@ class MyNotes {
 
   editNote(e) {
     let thisNote = jquery__WEBPACK_IMPORTED_MODULE_0___default()(e.target).parents("li");
+
+    if (thisNote.data("state") == "editable") {
+      // Make read only
+      this.makeNoteReadOnly(thisNote);
+    } else {
+      // Make editable
+      this.makeNoteEditable(thisNote);
+    }
+  } // Editing
+
+
+  makeNoteEditable(thisNote) {
+    thisNote.find(".edit-note").html('<i class="fa fa-times" aria-hidden="true"></i>Cancel');
     thisNote.find(".note-title-field, .note-body-field").removeAttr("readonly").addClass("note-active-field");
     thisNote.find(".update-note").addClass("update-note--visible");
+    thisNote.data("state", "editable");
+  } // Cancelling edit
+
+
+  makeNoteReadOnly(thisNote) {
+    thisNote.find(".edit-note").html('<i class="fa fa-pencil" aria-hidden="true"></i>Edit');
+    thisNote.find(".note-title-field, .note-body-field").attr("readonly", "readonly").removeClass("note-active-field");
+    thisNote.find(".update-note").removeClass("update-note--visible");
+    thisNote.data("state", "cancel");
   }
 
 }
