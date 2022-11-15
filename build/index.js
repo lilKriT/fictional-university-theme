@@ -2700,7 +2700,11 @@ class MyNotes {
         console.log(res);
       },
       error: res => {
-        console.log("Couldn't create");
+        if (res.responseText == "You have reached your note limit.") {
+          jquery__WEBPACK_IMPORTED_MODULE_0___default()(".note-limit-message").addClass("active");
+        }
+
+        console.log("Couldn't create.");
         console.log(res);
       }
     });
@@ -2716,6 +2720,11 @@ class MyNotes {
       },
       success: res => {
         thisNote.slideUp();
+
+        if (res.userNoteCount < 5) {
+          jquery__WEBPACK_IMPORTED_MODULE_0___default()(".note-limit-message").removeClass("active");
+        }
+
         console.log("Note removed");
         console.log(res);
       },
