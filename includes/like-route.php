@@ -48,7 +48,17 @@ function createLike($data)
     }
 }
 
-function deleteLike()
+function deleteLike($data)
 {
+    // Since this is a custom REST endpoint, you need to make it secure yourself
+    $likeID = sanitize_text_field($data['like']);
+    // does user id equal author of the like?
+    if (get_current_user_ID() == get_post_field("post_author", $likeID) && get_post_type($likeID) == "like") {
+        wp_delete_post($likeID, true);  // skip the trash
+        return "Like deleted.";
+    } else {
+        die("You don't have permission to delete that.");
+    }
+
     return "Like deleted";
 }
