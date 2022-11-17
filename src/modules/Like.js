@@ -24,6 +24,9 @@ class Like {
     $.ajax({
       url: universityData.root_url + "/wp-json/university/v1/manageLike",
       type: "POST",
+      beforeSend: (xhr) => {
+        xhr.setRequestHeader("X-WP-Nonce", universityData.nonce);
+      },
       data: { professorID: likeBox.data("professor") },
       success: (res) => {
         console.log(res);
