@@ -2653,11 +2653,29 @@ class Like {
   }
 
   createLike() {
-    alert("Create");
+    jquery__WEBPACK_IMPORTED_MODULE_0___default().ajax({
+      url: universityData.root_url + "/wp-json/university/v1/manageLike",
+      type: "POST",
+      success: res => {
+        console.log(res);
+      },
+      error: () => {
+        console.log(res);
+      }
+    });
   }
 
   deleteLike() {
-    alert("Delete");
+    jquery__WEBPACK_IMPORTED_MODULE_0___default().ajax({
+      url: universityData.root_url + "/wp-json/university/v1/manageLike",
+      type: "DELETE",
+      success: res => {
+        console.log(res);
+      },
+      error: () => {
+        console.log(res);
+      }
+    });
   }
 
 }
