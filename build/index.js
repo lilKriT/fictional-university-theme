@@ -2628,76 +2628,75 @@ class HeroSlider {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "jquery");
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 
 
 class Like {
   constructor() {
-    this.events();
+    if (document.querySelector(".like-box")) {
+      (axios__WEBPACK_IMPORTED_MODULE_0___default().defaults.headers.common["X-WP-Nonce"]) = universityData.nonce;
+      this.events();
+    }
   }
 
   events() {
-    jquery__WEBPACK_IMPORTED_MODULE_0___default()(".like-box").on("click", this.ourClickDispatcher.bind(this));
+    document.querySelector(".like-box").addEventListener("click", e => this.ourClickDispatcher(e));
   } // methods
 
 
   ourClickDispatcher(e) {
-    let currentLikeBox = jquery__WEBPACK_IMPORTED_MODULE_0___default()(e.target).closest(".like-box");
+    let currentLikeBox = e.target;
 
-    if (currentLikeBox.attr("data-exists") == "yes") {
+    while (!currentLikeBox.classList.contains("like-box")) {
+      currentLikeBox = currentLikeBox.parentElement;
+    }
+
+    if (currentLikeBox.getAttribute("data-exists") == "yes") {
       this.deleteLike(currentLikeBox);
     } else {
       this.createLike(currentLikeBox);
     }
   }
 
-  createLike(likeBox) {
-    jquery__WEBPACK_IMPORTED_MODULE_0___default().ajax({
-      url: universityData.root_url + "/wp-json/university/v1/manageLike",
-      type: "POST",
-      beforeSend: xhr => {
-        xhr.setRequestHeader("X-WP-Nonce", universityData.nonce);
-      },
-      data: {
-        professorID: likeBox.data("professor")
-      },
-      success: res => {
-        likeBox.attr("data-exists", "yes");
-        likeBox.attr("data-like", res);
-        let likeCount = parseInt(likeBox.find(".like-count").html(), 10);
+  async createLike(currentLikeBox) {
+    try {
+      const response = await axios__WEBPACK_IMPORTED_MODULE_0___default().post(universityData.root_url + "/wp-json/university/v1/manageLike", {
+        professorID: currentLikeBox.getAttribute("data-professor")
+      });
+
+      if (response.data != "Only logged in users can create a like.") {
+        currentLikeBox.setAttribute("data-exists", "yes");
+        var likeCount = parseInt(currentLikeBox.querySelector(".like-count").innerHTML, 10);
         likeCount++;
-        likeBox.find(".like-count").html(likeCount);
-        console.log(res);
-      },
-      error: res => {
-        console.log(res);
+        currentLikeBox.querySelector(".like-count").innerHTML = likeCount;
+        currentLikeBox.setAttribute("data-like", response.data);
       }
-    });
+
+      console.log(response.data);
+    } catch (e) {
+      console.log("Sorry");
+    }
   }
 
-  deleteLike(likeBox) {
-    jquery__WEBPACK_IMPORTED_MODULE_0___default().ajax({
-      url: universityData.root_url + "/wp-json/university/v1/manageLike",
-      type: "DELETE",
-      beforeSend: xhr => {
-        xhr.setRequestHeader("X-WP-Nonce", universityData.nonce);
-      },
-      data: {
-        like: likeBox.attr("data-like")
-      },
-      success: res => {
-        likeBox.attr("data-exists", "no");
-        likeBox.attr("data-like", "");
-        let likeCount = parseInt(likeBox.find(".like-count").html(), 10);
-        likeCount--;
-        likeBox.find(".like-count").html(likeCount);
-        console.log(res);
-      },
-      error: res => {
-        console.log(res);
-      }
-    });
+  async deleteLike(currentLikeBox) {
+    try {
+      const response = await axios__WEBPACK_IMPORTED_MODULE_0___default()({
+        url: universityData.root_url + "/wp-json/university/v1/manageLike",
+        method: "delete",
+        data: {
+          like: currentLikeBox.getAttribute("data-like")
+        }
+      });
+      currentLikeBox.setAttribute("data-exists", "no");
+      var likeCount = parseInt(currentLikeBox.querySelector(".like-count").innerHTML, 10);
+      likeCount--;
+      currentLikeBox.querySelector(".like-count").innerHTML = likeCount;
+      currentLikeBox.setAttribute("data-like", "");
+      console.log(response.data);
+    } catch (e) {
+      console.log(e);
+    }
   }
 
 }
@@ -3083,17 +3082,6 @@ class Search {
 __webpack_require__.r(__webpack_exports__);
 // extracted by mini-css-extract-plugin
 
-
-/***/ }),
-
-/***/ "jquery":
-/*!*************************!*\
-  !*** external "jQuery" ***!
-  \*************************/
-/***/ (function(module) {
-
-"use strict";
-module.exports = window["jQuery"];
 
 /***/ }),
 
