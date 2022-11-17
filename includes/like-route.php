@@ -14,9 +14,18 @@ function universityLikeRoutes()
 }
 add_action("rest_api_init", "universityLikeRoutes");
 
-function createLike()
+function createLike($data)
 {
-    return "Thanks for trying";
+    $professor = sanitize_text_field($data["professorID"]);
+
+    wp_insert_post(array(
+        "post_type" => "like",
+        "post_status" => "publish",
+        "post_title" => "A title for a Like",
+        "meta_input" => array(
+            "liked_professor_id" => $professor
+        )
+    ));
 }
 
 function deleteLike()
