@@ -86,13 +86,17 @@
     ?>
     <div data-glide-el="track" class="glide__track">
         <div class="glide__slides">
-            <?php foreach ($slides->posts as $slide) { ?>
-                <div class="hero-slider__slide" style="background-image: url(<?php echo get_theme_file_uri('/images/bus.jpg') ?>)">
+            <?php
+            while ($slides->have_posts()) {
+                $slides->the_post();
+                $link = get_field("slide_link");
+            ?>
+                <div class="hero-slider__slide" style="background-image: url(<?php echo the_field("slide_image") ?>)">
                     <div class="hero-slider__interior container">
                         <div class="hero-slider__overlay">
-                            <h2 class="headline headline--medium t-center">Free Transportation</h2>
-                            <p class="t-center">All students have free unlimited bus fare.</p>
-                            <p class="t-center no-margin"><a href="#" class="btn btn--blue">Learn more</a></p>
+                            <h2 class="headline headline--medium t-center"><?php the_title(); ?></h2>
+                            <p class="t-center"><?php the_content(); ?></p>
+                            <p class="t-center no-margin"><a href="<?php echo esc_url($link["url"]); ?>" class="btn btn--blue">Learn more</a></p>
                         </div>
                     </div>
                 </div>
